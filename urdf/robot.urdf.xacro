@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<robot name="arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.5 0.5 0.01" />
+            </geometry>
+            <material name="grey">
+                <color rgba="0.5 0.5 0.5 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.5 0.5 0.01" />
+            </geometry>
+        </collision>
+        
+    </link>
+
+
+    <joint name="base" type="revolute">
+        <parent link="base_link"/>
+        <child link="base_1"/>
+        <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000" lower="-3.14159265359" upper="3.14159265359" velocity="10"/>
+    </joint>
+    <joint name="base_shoulder" type="revolute">
+        <parent link="base_1"/>
+        <child link="shoulder_link"/>
+        <origin xyz="0.0 0 0.15" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+        <limit effort="1000" lower="-3.14159265359" upper="3.14159265359" velocity="10"/>
+        
+
+    </joint >
+
+    <joint name="shoulder_upper_arm" type="revolute">
+        <parent link="shoulder_link"/>
+        <child link="upper_arm_link"/>
+        <origin xyz="0.0 0 0.34" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+        <limit effort="1000" lower="-3.14159265359" upper="3.14159265359" velocity="10"/>
+
+    </joint>
+
+    <joint name="upper_arm_forearm" type="revolute">
+        <parent link="upper_arm_link"/>
+        <child link="forearm_link"/>
+        <origin xyz="0.0 0 0.32" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+        <limit effort="1000" lower="-3.14159265359" upper="3.14159265359" velocity="10"/>
+
+    </joint>
+
+    <joint name="forearm_wrist_1" type="revolute">
+        <parent link="forearm_link"/>
+        <child link="wrist_1_link"/>
+        <origin xyz="0.065 0 0" rpy="0 0 0"/>
+        <axis xyz="0.0 0.0 1.0"/>
+        <limit effort="1000" lower="-3.14159265359" upper="3.14159265359" velocity="10"/>
+        
+
+    </joint>
+
+    <joint name="wrist_1_wrist_2" type="revolute">
+        <parent link="wrist_1_link"/>
+        <child link="wrist_2_link"/>
+        <origin xyz="0.0 0 0.10" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+        <limit effort="1000" lower="-3.14159265359" upper="3.14159265359" velocity="10"/>
+        
+
+    </joint>
+
+    <link name="base_1">
+        <visual>
+            <origin xyz="0 0 0.08" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.03" length="0.15"/>
+            </geometry>
+            <material name="grey">
+                <color rgba="0.5 0.5 0.5 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0.08" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.03" length="0.15"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="shoulder_link">
+        <visual>
+            <origin xyz="0.06 0 0.175" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.03" length="0.35"/>
+            </geometry>
+        </visual>
+
+    </link>
+
+    <link name="upper_arm_link">
+        <visual>
+            <origin xyz="0.0 0 0.175" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.03" length="0.35"/>
+            </geometry>
+            <material name="grey">
+                <color rgba="0.5 0.5 0.5 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0 0.075" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.03" length="0.25"/>
+            </geometry>
+        </collision>
+
+    </link>
+    
+    <link name="forearm_link">
+        <visual>
+            <origin xyz="0.065 0 0" rpy="0 1.57 0"/>
+            <geometry>
+                <cylinder radius="0.03" length="0.07"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <link name ="wrist_1_link">
+        <visual>
+            <origin xyz="0.0 0 0.08" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.03" length="0.1"/>
+            </geometry>
+        </visual>
+
+    </link>
+
+    <link name="wrist_2_link" >
+        <visual>
+            <origin xyz="0.055 0.0 0.0" rpy="0 1.57 0" />
+            
+        <geometry>
+            <cylinder radius="0.03" length="0.05"/>
+        </geometry>
+        </visual>
+
+    </link>
+    
+</robot>
