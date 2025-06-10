@@ -1,7 +1,15 @@
 <?xml version="1.0"?>
 
-<robot
-  name="gripper">
+<robot name="gripper">
+
+  <joint name="wrist_2_end_effector" type="revolute">
+    <origin xyz="0.061 0 0" rpy="0 0 0" />
+    <parent link="wrist_2_link" />
+    <child link="robotiq_85_base_link" />
+    <axis xyz="1 0 0" />
+    <limit lower="-3.14159265358979" upper="3.14159265358979" effort="1000" velocity="2.0"/>
+    
+  </joint>
   <link
     name="robotiq_85_base_link">
     <inertial>
