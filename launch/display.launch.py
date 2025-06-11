@@ -9,7 +9,7 @@ from launch.substitutions import LaunchConfiguration, Command
 
 def generate_launch_description():
     pkg_path = get_package_share_directory('robotic_manipulator_6_dof')
-    pkg_path1 = get_package_share_directory('move_it_2')
+    pkg_path1 = get_package_share_directory('move_it_config')
     launch_dir = os.path.join(pkg_path1, 'launch')
     urdf_file = os.path.join(pkg_path,'urdf','robot.urdf.xacro')
     return LaunchDescription([
