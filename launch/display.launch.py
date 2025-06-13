@@ -19,6 +19,12 @@ def generate_launch_description():
             output="screen",
             parameters=[{"robot_description":Command(["xacro ", urdf_file])}]
         ),
+        Node(
+            package="joint_state_publisher_gui",
+            executable="joint_state_publisher_gui",
+            name="joint_state_publisher_gui",
+            output="screen"
+        ),
         IncludeLaunchDescription(
             PathJoinSubstitution([launch_dir, 'demo.launch.py'])
         )
