@@ -10,10 +10,6 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 find_package(geometry_msgs REQUIRED)
-find_package(tf2_ros REQUIRED)
-find_package(tf2 REQUIRED)
-find_package(xacro REQUIRED)
-
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -32,11 +28,21 @@ install(
   DIRECTORY meshes
   DESTINATION share/${PROJECT_NAME}
 )
-
-add_executable(arm_poses_node src/nodes/arm_poses.cpp)
-ament_target_dependencies(arm_poses_node rclcpp moveit_ros_planning_interface geometry_msgs)
 install(
-  TARGETS arm_poses_node
+  DIRECTORY config
+  DESTINATION share/${PROJECT_NAME}
+)
+
+add_executable(pose_goal_commander src/nodes/pose_goal_commander.cpp)
+ament_target_dependencies(
+  pose_goal_commander 
+  rclcpp 
+  moveit_ros_planning_interface 
+  geometry_msgs)
+
+
+install(
+  TARGETS pose_goal_commander
   DESTINATION lib/${PROJECT_NAME}
 )
 
