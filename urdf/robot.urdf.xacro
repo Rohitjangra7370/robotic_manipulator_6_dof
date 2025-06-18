@@ -31,6 +31,11 @@
         <box size="0.25 0.25 0.01" />
       </geometry>
     </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
   </link>
   <joint name="base_base_1" type="revolute">
     <parent link="base_link"/>
@@ -500,105 +505,95 @@
         multiplier="-1"
         offset="0" />
   </joint>
-  <link
-      name="right_inner_knuckle">
+  <link name="right_inner_knuckle">
     <inertial>
       <origin
-          xyz="0.0168606186773776 3.93808471820465E-10 0.0226699950793434"
-          rpy="0 0 0" />
+        xyz="0.0168606186773776 3.93808471820465E-10 0.0226699950793434"
+        rpy="0 0 0" />
       <mass
-          value="0.0110930853895903" />
-      <inertia
-          ixx="4.27134775939882E-06"
-          ixy="-8.53568456728898E-15"
-          ixz="1.77774229944246E-06"
-          iyy="3.96548790524392E-06"
-          iyz="-8.45108024914164E-15"
-          izz="3.20325997634666E-06" />
+        value="0.0110930853895903" />
+      <inertia 
+        ixx="4.27134775939882E-06"
+        ixy="-8.53568456728898E-15"
+        ixz="1.77774229944246E-06"
+        iyy="3.96548790524392E-06"
+        iyz="-8.45108024914164E-15"
+        izz="3.20325997634666E-06"/>
     </inertial>
     <visual>
       <origin
-          xyz="0 0 0"
-          rpy="0 0 0" />
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh
-            filename="package://robotic_manipulator_6_dof/meshes/inner_knuckle_fine.STL" />
+        <mesh filename="package://robotic_manipulator_6_dof/meshes/inner_knuckle_fine.STL" />
       </geometry>
-      <material
-          name="">
-        <color
-            rgba="0.1 0.1 0.1 1" />
+      <material name="">
+        <color rgba="0.1 0.1 0.1 1" />
       </material>
     </visual>
     <collision>
       <origin
-          xyz="0 0 0"
-          rpy="0 0 0" />
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh
-            filename="package://robotic_manipulator_6_dof/meshes/inner_knuckle_coarse.STL" />
+        <mesh filename="package://robotic_manipulator_6_dof/meshes/inner_knuckle_coarse.STL" />
       </geometry>
     </collision>
   </link>
-  <joint
-      name="right_inner_knuckle_joint"
-      type="revolute">
+  <joint name="right_inner_knuckle_joint" type="revolute">
     <origin
-        xyz="-0.0126999999998499 0 0.0693075000000361"
-        rpy="0 0 3.14159265358979" />
+      xyz="-0.0126999999998499 0 0.0693075000000361"
+      rpy="0 0 3.14159265358979" />
     <parent
-        link="robotiq_85_base_link" />
+      link="robotiq_85_base_link" />
     <child
-        link="right_inner_knuckle" />
+      link="right_inner_knuckle" />
     <axis
-        xyz="0 1 0" />
+      xyz="0 1 0" />
     <limit
-        lower="0"
-        upper="0.8757"
-        velocity="2.0"
-        effort="1000" />
+      lower="0"
+      upper="0.8757"
+      velocity="2.0"
+      effort="1000" />
     <mimic 
-        joint="finger_joint"
-        multiplier="-1"
-        offset="0" />
+      joint="finger_joint"
+      multiplier="-1"
+      offset="0" />
   </joint>
-  <link
-      name="right_inner_finger">
+  <link name="right_inner_finger">
     <inertial>
       <origin
-          xyz="0.00602756228812038 -6.47284509480176E-15 0.00669925609578108"
-          rpy="0 0 0" />
+        xyz="0.00602756228812038 -6.47284509480176E-15 0.00669925609578108"
+        rpy="0 0 0" />
       <mass
-          value="0.00724255346165744" />
-      <inertia
-          ixx="1.47824283625957E-06"
-          ixy="-3.95952064019123E-19"
-          ixz="-3.45268708875543E-07"
-          iyy="1.70064480838394E-06"
-          iyz="3.55286507960029E-19"
-          izz="4.77151241114822E-07" />
+        value="0.00724255346165744" />
+      <inertia 
+        ixx="1.47824283625957E-06"
+        ixy="-3.95952064019123E-19"
+        ixz="-3.45268708875543E-07"
+        iyy="1.70064480838394E-06"
+        iyz="3.55286507960029E-19"
+        izz="4.77151241114822E-07" />
     </inertial>
     <visual>
       <origin
-          xyz="0 0 0"
-          rpy="0 0 0" />
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
         <mesh
-            filename="package://robotic_manipulator_6_dof/meshes/inner_finger_fine.STL" />
+          filename="package://robotic_manipulator_6_dof/meshes/inner_finger_fine.STL" />
       </geometry>
-      <material
-          name="">
-        <color
-            rgba="0.1 0.1 0.1 1" />
+      <material name="">
+        <color rgba="0.1 0.1 0.1 1" />
       </material>
     </visual>
     <collision>
       <origin
-          xyz="0 0 0"
-          rpy="0 0 0" />
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
         <mesh
-            filename="package://robotic_manipulator_6_dof/meshes/inner_finger_coarse.STL" />
+          filename="package://robotic_manipulator_6_dof/meshes/inner_finger_coarse.STL" />
       </geometry>
     </collision>
   </link>
@@ -606,32 +601,32 @@
       name="right_inner_finger_joint"
       type="revolute">
     <origin
-        xyz="0.0341060475457406 0 0.0458573878541688"
-        rpy="0 0 0" />
+      xyz="0.0341060475457406 0 0.0458573878541688"
+      rpy="0 0 0" />
     <parent
-        link="right_inner_knuckle" />
+      link="right_inner_knuckle" />
     <child
-        link="right_inner_finger" />
+      link="right_inner_finger" />
     <axis
-        xyz="0 1 0" />
+      xyz="0 1 0" />
     <limit
-        lower="0"
-        upper="0.8757"
-        velocity="2.0"
-        effort="1000" />
+      lower="0"
+      upper="0.8757"
+      velocity="2.0"
+      effort="1000" />
     <mimic 
-        joint="finger_joint"
-        multiplier="1"
-        offset="0" />
+      joint="finger_joint"
+      multiplier="1"
+      offset="0" />
   </joint>
   <link
       name="right_outer_knuckle">
     <inertial>
       <origin
-          xyz="0.0178097074051638 3.60493211424024E-11 0.00233123458346721"
-          rpy="0 0 0" />
+        xyz="0.0178097074051638 3.60493211424024E-11 0.00233123458346721"
+        rpy="0 0 0" />
       <mass
-          value="0.00684838849401352" />
+        value="0.00684838849401352" />
       <inertia
           ixx="2.70004361573169E-07"
           ixy="1.59579467624491E-15"
@@ -642,16 +637,16 @@
     </inertial>
     <visual>
       <origin
-          xyz="0 0 0"
-          rpy="0 0 0" />
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
         <mesh
-            filename="package://robotic_manipulator_6_dof/meshes/outer_knuckle_fine.STL" />
+          filename="package://robotic_manipulator_6_dof/meshes/outer_knuckle_fine.STL" />
       </geometry>
       <material
           name="">
         <color
-            rgba="0.1 0.1 0.1 1" />
+          rgba="0.1 0.1 0.1 1" />
       </material>
     </visual>
     <collision>
@@ -741,7 +736,7 @@
   </joint>
   <ros2_control name="ArmHardware" type="system">
     <hardware>
-      <plugin>fake_components/GenericSystem</plugin>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
     </hardware>
     <joint name="base_base_1">
       <command_interface name="position"/>
@@ -779,4 +774,14 @@
       <state_interface name="velocity"/>
     </joint>
   </ros2_control>
+  <gazebo>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>robot_state_publisher</robot_param_node>
+      <parameters>$(find robotic_manipulator_6_dof)/config/ros2_controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+
+
 </robot>

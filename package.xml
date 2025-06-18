@@ -16,8 +16,19 @@
   <exec_depend>joint_state_publisher</exec_depend>
   <exec_depend>joint_state_publisher_gui</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>rviz</exec_depend>
+  <depend>gazebo_ros</depend>
+  <depend>gazebo_ros2_control</depend>
+  <depend>controller_manager</depend>
+  <depend>hardware_interface</depend>
+  <depend>pluginlib</depend>
+  <depend>std_msgs</depend>
+  <depend>angles</depend>
+  <depend>control_toolbox</depend>
+  <depend>yaml_cpp_vendor</depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>ros2_control_node</exec_depend>
   <depend>geometry_msgs</depend>
+  <depend>gz_ros2_control</depend>
   <depend>rclcpp</depend>
   <depend>rclcpp_components</depend>
   <depend>moveit_core</depend>
