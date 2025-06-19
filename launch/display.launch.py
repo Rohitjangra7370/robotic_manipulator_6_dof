@@ -59,7 +59,8 @@ def generate_launch_description():
                     'launch', 'gz_sim.launch.py'
                 )
             ]),
-            condition=IfCondition(LaunchConfiguration('use_gazebo'))
+            condition=IfCondition(LaunchConfiguration('use_gazebo')),
+            launch_arguments={'gz_args':'-r empty.sdf'}.items()
         ),
 
         # Spawn the robot into Gazebo
@@ -70,7 +71,7 @@ def generate_launch_description():
             output='screen',
             arguments=[
                 '-entity', 'robot_arm',
-                '-param', 'robot_description',
+                '-topic', 'robot_description',
                 '-x', '0', '-y', '0', '-z', '0.1',
                 '-R', '0', '-P', '0', '-Y', '0'
             ]
@@ -95,7 +96,7 @@ def generate_launch_description():
             name='spawn_controllers',
             arguments=[
                 'joint_state_controller',
-                'arm_controller',
+                'manipulator_controller',
                 'gripper_controller'
             ]
         ),
@@ -104,6 +105,10 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([
                 os.path.join(launch_dir, 'demo.launch.py')
-            ])
+            ]),
+            launch_arguments={
+                'use_sim_time': 'true',  # Critical for sync
+                'moveit_controller_manager': 'ros2_control'  # Explicit manager
+            }.items()
         )
     ])
