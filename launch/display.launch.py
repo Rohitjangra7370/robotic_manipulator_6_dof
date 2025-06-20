@@ -52,63 +52,66 @@ def generate_launch_description():
         ),
 
         # Gazebo Fortress launcher
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource([
-                os.path.join(
-                    get_package_share_directory(pkg_gz),
-                    'launch', 'gz_sim.launch.py'
-                )
-            ]),
-            condition=IfCondition(LaunchConfiguration('use_gazebo')),
-            launch_arguments={'gz_args':'-r empty.sdf'}.items()
-        ),
+        # IncludeLaunchDescription(
+        #     PythonLaunchDescriptionSource([
+        #         os.path.join(
+        #             get_package_share_directory(pkg_gz),
+        #             'launch', 'gz_sim.launch.py'
+        #         )
+        #     ]),
+        #     condition=IfCondition(LaunchConfiguration('use_gazebo')),
+        #     launch_arguments={'gz_args':'-r empty.sdf'}.items()
+        # ),
 
         # Spawn the robot into Gazebo
-        Node(
-            package='ros_gz_sim',
-            executable='create',
-            name='spawn_robot',
-            output='screen',
-            arguments=[
-                '-entity', 'robot_arm',
-                '-topic', 'robot_description',
-                '-x', '0', '-y', '0', '-z', '0.1',
-                '-R', '0', '-P', '0', '-Y', '0'
-            ]
-        ),
+        # Node(
+        #     package='ros_gz_sim',
+        #     executable='create',
+        #     name='spawn_robot',
+        #     output='screen',
+        #     arguments=[
+        #         '-entity', 'robot_arm',
+        #         '-topic', 'robot_description',
+        #         '-x', '0', '-y', '0', '-z', '0.1',
+        #         '-R', '0', '-P', '0', '-Y', '0'
+        #     ]
+        # ),
 
         # ros2_control manager node
-        Node(
-            package='controller_manager',
-            executable='ros2_control_node',
-            name='ros2_control_node',
-            output='screen',
-            parameters=[
-                controllers_yaml,
-                {'use_sim_time': True}
-            ]
-        ),
+        # Node(
+        #     package='controller_manager',
+        #     executable='ros2_control_node',
+        #     name='ros2_control_node',
+        #     output='screen',
+        #     parameters=[
+        #         controllers_yaml,
+        #         {'use_sim_time': True}
+        #     ]
+        # ),
 
         # Spawn controllers
-        Node(
-            package='controller_manager',
-            executable='spawner',
-            name='spawn_controllers',
-            arguments=[
-                'joint_state_controller',
-                'manipulator_controller',
-                'gripper_controller'
-            ]
-        ),
+        # Node(
+        #     package='controller_manager',
+        #     executable='spawner',
+        #     name='spawn_controllers',
+        #     parameters=[{'use_sim_time': True}],  # Added sim time sync
+        #     arguments=[
+        #         'joint_state_broadcaster',    # Essential for MoveIt2
+        #         'manipulator_controller',
+        #         'gripper_controller',
+        #         '--controller-manager', '/controller_manager',
+        #         '--controller-manager-timeout', '20'  # Allow time for Gazebo to initialize
+        #     ]
+        # ),
 
         # Include MoveIt demo launch (RViz, planning interface)
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([
                 os.path.join(launch_dir, 'demo.launch.py')
             ]),
-            launch_arguments={
-                'use_sim_time': 'true',  # Critical for sync
-                'moveit_controller_manager': 'ros2_control'  # Explicit manager
-            }.items()
+            # launch_arguments={
+            #     'use_sim_time': 'true',  # Critical for sync
+            #     'moveit_controller_manager': 'ros2_control'  # Explicit manager
+            # }.items()
         )
     ])
