@@ -8,48 +8,43 @@ from launch.substitutions import Command, FindExecutable, LaunchConfiguration, P
 from launch_ros.actions import Node
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from ament_index_python.packages import get_package_share_directory
+from launch.actions import SetEnvironmentVariable
 
 def generate_launch_description():
     # Package paths
-    pkg_name = 'robotic_manipulator_6_dof'
+    pkg_main = 'robotic_manipulator_6_dof'
     pkg_moveit = 'move_it_config'
     pkg_gz = 'ros_gz_sim'
-    pkg_path = get_package_share_directory(pkg_name)
-    launch_dir = os.path.join(get_package_share_directory(pkg_moveit), 'launch')
+    pkg_path = get_package_share_directory(pkg_main)
+    launch_dir_moveit = os.path.join(get_package_share_directory(pkg_moveit), 'launch')
+    launch_dir_main = os.path.join(get_package_share_directory(pkg_main), 'launch')
     xacro_file = os.path.join(pkg_path, 'urdf', 'robot.urdf.xacro')
     controllers_yaml = os.path.join(pkg_path, 'config', 'ros2_controllers.yaml')
 
-    # Launch arguments
-    declare_gazebo = DeclareLaunchArgument(
-        'use_gazebo',
-        default_value='true',
-        description='Whether to launch Gazebo Fortress'
-    )
-    declare_description = DeclareLaunchArgument(
-        'robot_description',
-        default_value=Command([
-            FindExecutable(name='xacro'), ' ',
-            xacro_file
-        ]),
-        description='URDF description of the robot'
+    set_gz_version = SetEnvironmentVariable(
+        name='GZ_VERSION',
+        value='garden'
     )
 
     # Launch description
     return LaunchDescription([
-        declare_gazebo,
-        declare_description,
+        set_gz_version,
+        
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                os.path.join(launch_dir_main, 'robot_state_publisher_launch.py')
+        ])
+        ),
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                os.path.join(launch_dir_main, 'gazebo_launch.py')
+        ])
+        ),
 
         # Robot state publisher with simulated time
-        Node(
-            package='robot_state_publisher',
-            executable='robot_state_publisher',
-            name='robot_state_publisher',
-            output='screen',
-            parameters=[{
-                'use_sim_time': True,
-                'robot_description': LaunchConfiguration('robot_description')
-            }]
-        ),
+
 
         # Gazebo Fortress launcher
         # IncludeLaunchDescription(
@@ -107,7 +102,7 @@ def generate_launch_description():
         # Include MoveIt demo launch (RViz, planning interface)
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([
-                os.path.join(launch_dir, 'demo.launch.py')
+                os.path.join((launch_dir_moveit), 'demo.launch.py')
             ]),
             # launch_arguments={
             #     'use_sim_time': 'true',  # Critical for sync

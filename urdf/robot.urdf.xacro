@@ -736,7 +736,7 @@
   </joint>
   <ros2_control name="ArmHardware" type="system">
     <hardware>
-      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+      <plugin>gz_ros2_control/GzSystem</plugin>
     </hardware>
     <joint name="base_base_1">
       <command_interface name="position"/>
@@ -774,14 +774,14 @@
       <state_interface name="velocity"/>
     </joint>
   </ros2_control>
-  <gazebo>
+  <!-- <gazebo>
     <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
       <robot_param>robot_description</robot_param>
       <robot_param_node>robot_state_publisher</robot_param_node>
-      <parameters>$(find move_it_config)/config/ros2_controllers.yaml</parameters>
+      <parameters>robotic_manipulator_6_dof/config/ros2_controllers.yaml</parameters>
       <controller_manager_name>controller_manager</controller_manager_name>
-    </plugin>
-  </gazebo>
+    </plugin> -->
+  <!-- </gazebo> -->
 
 
 
