@@ -13,7 +13,7 @@ from launch.actions import SetEnvironmentVariable
 def generate_launch_description():
     # Package paths
     pkg_main = 'robotic_manipulator_6_dof'
-    pkg_moveit = 'move_it_config'
+    pkg_moveit = 'move_it_config_testing_june_25'
     pkg_gz = 'ros_gz_sim'
     pkg_path = get_package_share_directory(pkg_main)
     launch_dir_moveit = os.path.join(get_package_share_directory(pkg_moveit), 'launch')
@@ -25,6 +25,11 @@ def generate_launch_description():
         name='GZ_VERSION',
         value='garden'
     )
+    
+    # srdf_file = os.path.join(pkg_moveit, 'config', 'arm.srdf')
+    # with open(srdf_file, 'r') as f:
+    #     robot_description_semantic = f.read()
+    # kinematics_yaml = os.path.join(pkg_moveit, 'config', 'kinematics.yaml')
 
     # Launch description
     return LaunchDescription([

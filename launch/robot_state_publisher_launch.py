@@ -12,7 +12,7 @@ from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
     # Package paths
     pkg_name = 'robotic_manipulator_6_dof'
-    pkg_moveit = 'move_it_config'
+    pkg_moveit = 'move_it_config_testing_june_25'
     pkg_gz = 'ros_gz_sim'
     pkg_path = get_package_share_directory(pkg_name)
     launch_dir = os.path.join(get_package_share_directory(pkg_moveit), 'launch')
