@@ -28,12 +28,6 @@ def generate_launch_description():
         description='Use simulation (Gazebo) clock if true'
     )
 
-    declare_gazebo = DeclareLaunchArgument(
-        'use_gazebo',
-        default_value='true',
-        description='Whether to launch Gazebo Fortress'
-    )
-
     declare_robot_description=DeclareLaunchArgument(
         'robot_description',
         default_value=Command([
@@ -57,7 +51,6 @@ def generate_launch_description():
 
     return LaunchDescription([
         using_sim_time,
-        declare_gazebo,
         declare_robot_description,
         robot_state_publisher
 
